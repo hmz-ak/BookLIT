@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SliderData } from "./SliderData";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import { Container } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
@@ -26,14 +27,16 @@ const ImageSlider = ({ slides }) => {
 
       {slides.map((slide, index) => {
         return (
-          <div
-            className={index === current ? "slide active" : "slide"}
-            key={index}
-          >
-            {index === current && (
-              <img src={slide.image} alt="travel image" className="image" />
-            )}
-          </div>
+          <Link>
+            <div
+              className={index === current ? "slide active" : "slide"}
+              key={index}
+            >
+              {index === current && (
+                <img src={slide.image} alt="travel image" className="image" />
+              )}
+            </div>
+          </Link>
         );
       })}
     </section>
