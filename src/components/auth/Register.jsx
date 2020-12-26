@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
 import userService from "../services/UserService";
-// import UserService from "../services/UserService";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,7 +63,12 @@ const Register = () => {
                 console.log(data);
                 window.location.href = "/login";
               })
-              .catch((err) => console.log(err));
+              .catch((err) => {
+                console.log(err);
+                toast.error(err.response.data, {
+                  position: toast.POSITION.TOP_CENTER,
+                });
+              });
           }}
         >
           Register

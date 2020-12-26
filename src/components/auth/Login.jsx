@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
 import userService from "../services/UserService";
-// import UserService from "../services/UserService";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState("hamza.akram07@hotmail.com");
-  const [password, setPassword] = useState("hamza@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <div className={classes.container}>
       <div className={classes.child}>
@@ -51,9 +51,15 @@ const Login = () => {
               .login(email, password)
               .then((data) => {
                 console.log(data);
+
                 window.location.href = "/";
               })
-              .catch((err) => console.log(err));
+              .catch((err) => {
+                console.log(err);
+                toast.error(err.response.data, {
+                  position: toast.POSITION.TOP_CENTER,
+                });
+              });
           }}
         >
           Login
