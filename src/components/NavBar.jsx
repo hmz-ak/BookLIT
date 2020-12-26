@@ -47,12 +47,18 @@ export default function NavBar() {
                   Login
                 </Button>
               </Link>
-              <Button
-                style={{ background: "#000000", marginLeft: 10 }}
-                color="inherit"
-              >
-                Register
-              </Button>
+              <Link to="/register" className={classes.link}>
+                <Button
+                  style={{
+                    background: "#000000",
+                    marginLeft: 10,
+                    color: "white",
+                  }}
+                  color="inherit"
+                >
+                  Register
+                </Button>
+              </Link>
             </>
           ) : (
             <Button

@@ -6,6 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <NavBar />
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
         </Switch>
       </div>
     </Router>
