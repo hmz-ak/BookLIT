@@ -33,11 +33,11 @@ export default function NavBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" style={{ background: "#FFFFFF" }}>
+      <AppBar position="static" style={{ background: "#FFFFFF" }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link to="/" className={classes.link2}>
-              Readers Club
+              <strong>BOOKLIT</strong>
             </Link>
           </Typography>
           {!userService.isLoggedIn() ? (

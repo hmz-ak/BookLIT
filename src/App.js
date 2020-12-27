@@ -12,6 +12,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import LandingPage from "./components/LandingPage";
+import Footer from "./components/Footer";
+import SingleNovel from "./components/readers_club/SingleNovel";
 
 function App() {
   return (
@@ -22,9 +24,11 @@ function App() {
         <NavBar />
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/novels/:id" component={SingleNovel} />
           <Route path="/register" component={Register} />
           <Route path="/" component={LandingPage} />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
