@@ -25,6 +25,11 @@
   border-radius: 10px;
 }
 
+.shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+}
+
 .right-arrow {
   position: absolute;
   top: 50%;

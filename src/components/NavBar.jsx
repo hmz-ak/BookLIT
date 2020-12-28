@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar(props) {
+  console.log(props);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -88,13 +89,7 @@ export default function NavBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem
-                  onClick={(e) => {
-                    console.log("clicked");
-                  }}
-                >
-                  Create a new story
-                </MenuItem>
+                <MenuItem onClick={(e) => {}}>Create a new story</MenuItem>
                 <Divider />
                 <MenuItem>My Stories</MenuItem>
               </Menu>

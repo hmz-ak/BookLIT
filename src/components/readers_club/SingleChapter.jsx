@@ -49,45 +49,59 @@ const SingleChapter = (props) => {
       ) : (
         <>
           <Grid container spacing={3} style={{ marginTop: "30px" }}>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={4}>
+            <Grid
+              item
+              xs={12}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                filter: "brightness(20%)",
+                opacity: "0.9",
+              }}
+            >
               <img
                 className="image3"
-                width="400px"
+                width="1280px"
                 height="400px"
                 src={chapter.image}
                 alt=""
               />
             </Grid>
-            <Grid item xs={4}></Grid>
           </Grid>
 
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography
-                variant="h4"
+                variant="h3"
                 component="h4"
                 style={{
+                  position: "absolute",
                   textAlign: "center",
-                  marginTop: "20px",
-                  marginBottom: "20px",
+                  bottom: "30%",
+                  width: "100%",
+                  color: "whitesmoke",
+
+                  fontWeight: "bold",
                 }}
               >
                 {chapter.title}
               </Typography>
             </Grid>
           </Grid>
-          <Divider />
           <Container
             maxWidth="lg"
+            className="shadow"
             style={{
-              backgroundColor: "whitesmoke",
-              borderRadius: "20px",
               marginTop: "40px",
-              padding: "20px",
+              padding: "30px",
             }}
           >
-            <Typography variant="h5" component="h3">
+            <Typography
+              variant="h4"
+              component="h3"
+              style={{ lineHeight: 1.8, fontSize: "25px" }}
+            >
               {chapter.content}
             </Typography>
           </Container>

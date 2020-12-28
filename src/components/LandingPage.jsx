@@ -43,7 +43,7 @@ const LandingPage = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 marginTop: "10%",
-                marginBottom: "20%",
+                marginBottom: "30%",
               }}
             >
               <Loader
