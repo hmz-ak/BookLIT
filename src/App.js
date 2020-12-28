@@ -14,6 +14,7 @@ import Register from "./components/auth/Register";
 import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer";
 import SingleNovel from "./components/readers_club/SingleNovel";
+import SingleChapter from "./components/readers_club/SingleChapter";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/novels/:id" component={SingleNovel} />
+          <Route path="/chapter/:id" component={SingleChapter} />
           <Route path="/register" component={Register} />
           <Route path="/" component={LandingPage} />
         </Switch>

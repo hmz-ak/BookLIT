@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import userService from "./services/UserService";
+import { Divider, Menu, MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NavBar() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const classes = useStyles();
 
   return (
@@ -61,16 +71,45 @@ export default function NavBar() {
               </Link>
             </>
           ) : (
-            <Button
-              style={{ background: "#000000" }}
-              color="inherit"
-              onClick={(e) => {
-                userService.logout();
-                window.location.reload();
-              }}
-            >
-              Logout
-            </Button>
+            <>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+                style={{ marginRight: "30px" }}
+              >
+                Write
+              </Button>
+              ]
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  onClick={(e) => {
+                    console.log("clicked");
+                  }}
+                >
+                  Create a new story
+                </MenuItem>
+                <Divider />
+                <MenuItem>My Stories</MenuItem>
+              </Menu>
+              <Button
+                style={{ background: "#000000" }}
+                color="inherit"
+                size="small"
+                onClick={(e) => {
+                  userService.logout();
+                  window.location.reload();
+                }}
+              >
+                Logout
+              </Button>
+            </>
           )}
         </Toolbar>
       </AppBar>
