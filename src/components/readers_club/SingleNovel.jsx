@@ -57,7 +57,7 @@ const SingleNovel = (props) => {
                 color="#00BFFF"
                 height={100}
                 width={100}
-                timeout={3000} //3 secs
+                timeout={6000} //6 secs
               />
             </Grid>
           </Grid>

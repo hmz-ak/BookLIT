@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import userService from "./services/UserService";
 import { Divider, Menu, MenuItem } from "@material-ui/core";
+import { withRouter } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar(props) {
+const NavBar = (props) => {
   console.log(props);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -89,7 +90,14 @@ export default function NavBar(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={(e) => {}}>Create a new story</MenuItem>
+                <MenuItem
+                  onClick={(e) => {
+                    handleClose();
+                    props.history.push("/newstory");
+                  }}
+                >
+                  Create a new story
+                </MenuItem>
                 <Divider />
                 <MenuItem>My Stories</MenuItem>
               </Menu>
@@ -110,4 +118,6 @@ export default function NavBar(props) {
       </AppBar>
     </div>
   );
-}
+};
+
+export default withRouter(NavBar);

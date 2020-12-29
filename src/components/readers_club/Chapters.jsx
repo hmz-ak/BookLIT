@@ -25,9 +25,8 @@ const Chapters = (props) => {
     <List component="nav" className={classes.root} aria-label="mailbox folders">
       {chapters.map((chapter, index) => {
         return (
-          <>
+          <div key={index}>
             <ListItem
-              key={index}
               button
               onClick={(e) => {
                 userService.isLoggedIn()
@@ -40,7 +39,7 @@ const Chapters = (props) => {
               <ListItemText primary={chapter.title} />
             </ListItem>
             <Divider />
-          </>
+          </div>
         );
       })}
     </List>

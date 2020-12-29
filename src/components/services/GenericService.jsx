@@ -27,6 +27,17 @@ class GenericService {
           reject(err);
         });
     });
+  postNovel = (url, data, config) =>
+    new Promise((resolve, reject) => {
+      axios
+        .post(url, data, config)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
 
   put = (url, data) =>
     new Promise((resolve, reject) => {
