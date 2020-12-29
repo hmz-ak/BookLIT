@@ -133,7 +133,14 @@ const NavBar = (props) => {
                   Create a new story
                 </MenuItem>
                 <Divider />
-                <MenuItem>My Stories</MenuItem>
+                <MenuItem
+                  onClick={(e) => {
+                    handleClose();
+                    props.history.push("/mystory");
+                  }}
+                >
+                  My Stories
+                </MenuItem>
               </Menu>
               <Button
                 style={{ background: "#000000" }}

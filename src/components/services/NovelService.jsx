@@ -12,6 +12,7 @@ class NovelService extends GenericService {
   deleteNovel = (_id) => this.delete("/api/novels/delete/" + _id);
   updateNovel = (_id, formData, config) =>
     this.putData("/api/novels/update/" + _id, formData, config);
+  getStories = () => this.get("/api/novels/mystories");
 }
 
 let novelService = new NovelService();
