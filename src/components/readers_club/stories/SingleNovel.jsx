@@ -20,6 +20,7 @@ const SingleNovel = (props) => {
   const [chapters, setChapters] = useState([]);
   const [library, setLibrary] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [trigger, setTrigger] = useState(false);
 
   const id = props.match.params.id;
 
@@ -36,7 +37,7 @@ const SingleNovel = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [trigger]);
 
   return (
     <div>
@@ -127,6 +128,19 @@ const SingleNovel = (props) => {
                     style={{ marginTop: "30px" }}
                     variant="contained"
                     color="secondary"
+                    onClick={(e) => {
+                      setLoader(true);
+                      libraryService
+                        .deleteLibrary(novel._id)
+                        .then((data) => {
+                          console.log(data);
+                          setLoader(false);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                      setTrigger(false);
+                    }}
                   >
                     Remove From Library
                   </Button>
@@ -137,15 +151,17 @@ const SingleNovel = (props) => {
                     color="primary"
                     onClick={(e) => {
                       console.log(novel._id);
-
+                      setLoader(true);
                       libraryService
                         .addLibrary(novel)
                         .then((data) => {
                           console.log(data);
+                          setLoader(false);
                         })
                         .catch((err) => {
                           console.log(err);
                         });
+                      setTrigger(true);
                     }}
                   >
                     Add To Library
