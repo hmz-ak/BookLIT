@@ -183,6 +183,9 @@ const SingleNovel = (props) => {
                         marginRight: "10px",
                       }}
                       variant="contained"
+                      onClick={(e) => {
+                        props.history.push("/novels/update/" + novel._id);
+                      }}
                     >
                       Edit
                     </Button>

@@ -28,12 +28,13 @@ const UpdateStory = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");
-  const [password, setPassword] = useState("");
   const [genre, setGenre] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(false);
+
+  const id = props.match.params.id;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -51,7 +52,22 @@ const UpdateStory = (props) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(selectedGenre);
+
+  useEffect(() => {
+    setLoader(true);
+    novelService
+      .getSingleNovel(id)
+      .then((data) => {
+        console.log(data.novel.theme);
+        setName(data.novel.name);
+        setTheme(data.novel.theme);
+        setSelectedGenre(data.novel.genre);
+        setLoader(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,11 +86,11 @@ const UpdateStory = (props) => {
       };
 
       novelService
-        .addNovel(formData, config)
+        .updateNovel(id, formData, config)
         .then((data) => {
           console.log(data);
           setLoader(false);
-          props.history.push("/new/chapter/" + data.novel._id);
+          props.history.push("/novels/" + id);
         })
         .catch((err) => {
           console.log(err);
@@ -171,6 +187,7 @@ const UpdateStory = (props) => {
               multiline
               rows={12}
               fullWidth
+              value={theme}
               variant="outlined"
               placeholder="Enter theme of your story"
               onChange={(e) => {
@@ -193,7 +210,7 @@ const UpdateStory = (props) => {
             <br />
             <br />
             <Button variant="contained" color="primary" type="submit">
-              Add
+              Update
             </Button>
           </form>
         </div>

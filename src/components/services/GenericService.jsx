@@ -51,6 +51,18 @@ class GenericService {
         });
     });
 
+  putData = (url, data, config) =>
+    new Promise((resolve, reject) => {
+      axios
+        .put(url, data, config)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+
   delete = (url) =>
     new Promise((resolve, reject) => {
       axios
