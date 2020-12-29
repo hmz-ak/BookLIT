@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import SingleNovel from "./components/readers_club/SingleNovel";
 import SingleChapter from "./components/readers_club/SingleChapter";
 import NewStory from "./components/readers_club/NewStory";
+import NewChapter from "./components/readers_club/NewChapter";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/novels/:id" component={SingleNovel} />
           <Route path="/chapter/:id" component={SingleChapter} />
+          <Route path="/new/chapter/:id" component={NewChapter} />
           <Route path="/register" component={Register} />
           <Route path="/newstory" component={NewStory} />
           <Route path="/" component={LandingPage} />

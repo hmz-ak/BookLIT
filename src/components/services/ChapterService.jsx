@@ -7,7 +7,8 @@ class ChapterService extends GenericService {
 
   getChapter = () => this.get("/api/chapters");
   getSingleChapter = (id) => this.get("/api/chapters/" + id);
-  addChapter = (data) => this.post("/api/chapters", data);
+  addChapter = (formData, config) =>
+    this.postData("/api/chapters", formData, config);
   deleteChapter = (_id) => this.delete("/api/chapters/delete/" + _id);
   updateChapter = (_id, data) => this.put("/api/chapters/update/" + _id, data);
 }

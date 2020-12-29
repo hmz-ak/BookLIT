@@ -27,7 +27,7 @@ class GenericService {
           reject(err);
         });
     });
-  postNovel = (url, data, config) =>
+  postData = (url, data, config) =>
     new Promise((resolve, reject) => {
       axios
         .post(url, data, config)

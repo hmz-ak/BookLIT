@@ -7,6 +7,8 @@ import genreService from "../services/GenreService";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import novelService from "../services/NovelService";
+import { withRouter } from "react-router";
+
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewStory = () => {
+const NewStory = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");
@@ -72,6 +74,8 @@ const NewStory = () => {
         .then((data) => {
           console.log(data);
           setLoader(false);
+          props.history.push("/new/chapter/" + data.novel._id);
+          console.log();
         })
         .catch((err) => {
           console.log(err);
@@ -199,4 +203,4 @@ const NewStory = () => {
   );
 };
 
-export default NewStory;
+export default withRouter(NewStory);
