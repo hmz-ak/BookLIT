@@ -11,6 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useState } from "react";
 import genreService from "../../services/GenreService";
 import { Container, Grid } from "@material-ui/core";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 300,
@@ -24,6 +27,8 @@ const useStyles = makeStyles({
 });
 const GenreSpecificStory = (props) => {
   const [novels, setNovels] = useState([]);
+  const [loader, setLoader] = useState(true);
+
   const genre = props.match.params.name;
   const classes = useStyles();
 
@@ -33,6 +38,7 @@ const GenreSpecificStory = (props) => {
       .then((data) => {
         console.log(data);
         setNovels(data);
+        setLoader(false);
       })
       .catch((err) => {
         console.log(err);
@@ -41,35 +47,61 @@ const GenreSpecificStory = (props) => {
 
   return (
     <div>
-      <Container maxWidth="lg" style={{ marginTop: "50px" }}>
-        <Grid container spacing={3}>
-          {novels.map((novel, index) => {
-            return (
-              <Grid item xs={4}>
-                <Card
-                  className={classes.root}
-                  onClick={(e) => {
-                    props.history.push("/novels/" + novel._id);
-                  }}
-                >
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={novel.image}
-                      title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                      <Typography style={{ height: "40px" }}>
-                        {novel.name}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Container>
+      {loader ? (
+        <Container maxWidth="lg">
+          <Grid container spacing={3}>
+            <Grid
+              item
+              xs={12}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "10%",
+                marginBottom: "20%",
+              }}
+            >
+              <Loader
+                type="ThreeDots"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={6000} //6 secs
+              />
+            </Grid>
+          </Grid>
+        </Container>
+      ) : (
+        <Container maxWidth="lg" style={{ marginTop: "50px" }}>
+          <Grid container spacing={3}>
+            {novels.map((novel, index) => {
+              return (
+                <Grid item xs={4}>
+                  <Card
+                    className={classes.root}
+                    onClick={(e) => {
+                      props.history.push("/novels/" + novel._id);
+                    }}
+                  >
+                    <CardActionArea>
+                      <CardMedia
+                        className={classes.media}
+                        image={novel.image}
+                        title="Contemplative Reptile"
+                      />
+                      <CardContent>
+                        <Typography style={{ height: "40px" }}>
+                          {novel.name}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Container>
+      )}
     </div>
   );
 };

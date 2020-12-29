@@ -24,7 +24,6 @@ const useStyles = makeStyles({
 });
 const Library = (props) => {
   const [lib, setLib] = useState([]);
-  const [library, setLibrary] = useState([]);
   const [loader, setLoader] = useState(true);
   const classes = useStyles();
 

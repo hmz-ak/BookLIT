@@ -6,7 +6,7 @@ class LibraryService extends GenericService {
   }
 
   getLibrary = () => this.get("/api/library");
-  addLibrary = (data) => this.post("/api/library", data);
+  addLibrary = (formData) => this.post("/api/library", formData);
   deleteLibrary = (_id) => this.delete("/api/library/delete/" + _id);
 }
 

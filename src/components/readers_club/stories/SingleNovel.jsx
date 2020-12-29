@@ -12,6 +12,7 @@ import chapterService from "../../services/ChapterService";
 import Chapters from "../chapters/Chapters";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import libraryService from "../../services/LibraryService";
 
 const SingleNovel = (props) => {
   const [novel, setNovel] = useState([]);
@@ -134,6 +135,18 @@ const SingleNovel = (props) => {
                     style={{ marginTop: "30px" }}
                     variant="contained"
                     color="primary"
+                    onClick={(e) => {
+                      console.log(novel._id);
+
+                      libraryService
+                        .addLibrary(novel)
+                        .then((data) => {
+                          console.log(data);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
                   >
                     Add To Library
                   </Button>
