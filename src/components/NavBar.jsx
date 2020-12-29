@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     textDecoration: "none",
   },
+  link3: {
+    color: "black",
+    textDecoration: "none",
+    marginRight: "15px",
+    fontWeight: 600,
+  },
 }));
 
 const NavBar = (props) => {
@@ -52,10 +58,37 @@ const NavBar = (props) => {
               <strong>BOOKLIT</strong>
             </Link>
           </Typography>
+          <ul
+            id="menu"
+            style={{
+              marginRight: "60%",
+            }}
+          >
+            <li>
+              <Link to="/" className={classes.link3}>
+                HOME
+              </Link>
+            </li>
+            <li>
+              <Link to="/genre" className={classes.link3}>
+                BROWSE
+              </Link>
+            </li>
+            <li>
+              <Link to="/" className={classes.link3}>
+                LIBRARY
+              </Link>
+            </li>
+          </ul>
+
           {!userService.isLoggedIn() ? (
             <>
               <Link to="/login" className={classes.link}>
-                <Button style={{ background: "#000000" }} color="inherit">
+                <Button
+                  size="small"
+                  style={{ background: "#000000" }}
+                  color="inherit"
+                >
                   Login
                 </Button>
               </Link>
@@ -66,6 +99,7 @@ const NavBar = (props) => {
                     marginLeft: 10,
                     color: "white",
                   }}
+                  size="small"
                   color="inherit"
                 >
                   Register

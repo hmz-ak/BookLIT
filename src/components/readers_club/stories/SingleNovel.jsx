@@ -6,9 +6,10 @@ import {
   Container,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import novelService from "../services/NovelService";
-import userService from "../services/UserService";
-import Chapters from "./Chapters";
+import novelService from "../../services/NovelService";
+import userService from "../../services/UserService";
+import chapterService from "../../services/ChapterService";
+import Chapters from "../chapters/Chapters";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -105,6 +106,17 @@ const SingleNovel = (props) => {
                       color: "white",
                     }}
                     variant="contained"
+                    onClick={(e) => {
+                      chapterService
+                        .getSingleChapter(chapters[0]._id)
+                        .then((data) => {
+                          console.log(data);
+                          props.history.push("/chapter/" + data.chapter._id);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
                   >
                     Read Now
                   </Button>

@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import { withRouter } from "react-router";
-import userService from "../services/UserService";
+import userService from "../../services/UserService";
 import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({

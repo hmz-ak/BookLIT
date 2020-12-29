@@ -1,5 +1,5 @@
 import { Container, Divider, Grid, Typography } from "@material-ui/core";
-import chapterService from "../services/ChapterService";
+import chapterService from "../../services/ChapterService";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import React, { useEffect, useState } from "react";

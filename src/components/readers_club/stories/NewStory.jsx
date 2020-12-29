@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Container, Grid, TextField } from "@material-ui/core";
-import userService from "../services/UserService";
+import userService from "../../services/UserService";
 import { toast } from "react-toastify";
-import genreService from "../services/GenreService";
+import genreService from "../../services/GenreService";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import novelService from "../services/NovelService";
+import novelService from "../../services/NovelService";
 import { withRouter } from "react-router";
 
 import Loader from "react-loader-spinner";

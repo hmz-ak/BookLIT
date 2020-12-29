@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Container, Grid, TextField } from "@material-ui/core";
-import userService from "../services/UserService";
+import userService from "../../services/UserService";
 import { toast } from "react-toastify";
 import Loader from "react-loader-spinner";
+import { withRouter } from "react-router";
+
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import chapterService from "../services/ChapterService";
+import chapterService from "../../services/ChapterService";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,22 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewChapter = (props) => {
-  console.log(props);
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [anchorEl, setAnchorEl] = useState(null);
   const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(false);
   const id = props.match.params.id;
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     toast.info("Add a new chapter", {
@@ -44,7 +36,7 @@ const NewChapter = (props) => {
   }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setLoader(true);
     const formData = new FormData();
     formData.append("novel_id", id);
     formData.append("title", title);
@@ -61,6 +53,7 @@ const NewChapter = (props) => {
       .then((data) => {
         console.log(data);
         setLoader(false);
+        props.history.push("/novels/" + id);
       })
       .catch((err) => {
         console.log(err);
@@ -146,4 +139,4 @@ const NewChapter = (props) => {
   );
 };
 
-export default NewChapter;
+export default withRouter(NewChapter);
