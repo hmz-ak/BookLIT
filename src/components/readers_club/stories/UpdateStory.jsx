@@ -35,7 +35,6 @@ const UpdateStory = (props) => {
   const [loader, setLoader] = useState(false);
 
   const id = props.match.params.id;
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

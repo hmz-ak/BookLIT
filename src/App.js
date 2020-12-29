@@ -22,6 +22,7 @@ import GenreSpecificStory from "./components/readers_club/genres/GenreSpecificSt
 import Library from "./components/readers_club/libraries/Library";
 import UpdateStory from "./components/readers_club/stories/UpdateStory";
 import MyStories from "./components/readers_club/stories/MyStories";
+import UpdateChapter from "./components/readers_club/chapters/UpdateChapter";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/genre/:name" component={GenreSpecificStory} />
           <Route path="/novels/update/:id" exact component={UpdateStory} />
-
+          <Route path="/chapter/update/:id" exact component={UpdateChapter} />
           <Route path="/novels/:id" component={SingleNovel} />
           <Route path="/chapter/:id" component={SingleChapter} />
           <Route path="/new/chapter/:id" component={NewChapter} />

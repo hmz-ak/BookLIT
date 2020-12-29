@@ -1,8 +1,17 @@
-import { Container, Divider, Grid, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import chapterService from "../../services/ChapterService";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import React, { useEffect, useState } from "react";
+import userService from "../../services/UserService";
+import Chapters from "./Chapters";
+import { withRouter } from "react-router-dom";
 
 const SingleChapter = (props) => {
   const id = props.match.params.id;
@@ -48,6 +57,59 @@ const SingleChapter = (props) => {
         </Container>
       ) : (
         <>
+          <Grid container spacing={3}>
+            <Grid item xs={4}></Grid>
+            <Grid
+              item
+              xs={4}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              {chapter.user_id[0] == userService.getLoggedInUser()._id && (
+                <>
+                  <Button
+                    style={{
+                      marginTop: "30px",
+                      backgroundColor: "goldenrod",
+                      color: "white",
+                      marginRight: "10px",
+                    }}
+                    variant="contained"
+                    onClick={(e) => {
+                      props.history.push("/chapter/update/" + chapter._id);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    style={{
+                      marginTop: "30px",
+                      backgroundColor: "indianred",
+                      color: "white",
+                      marginRight: "10px",
+                    }}
+                    variant="contained"
+                    onClick={(e) => {
+                      setLoader(true);
+                      chapterService
+                        .deleteChapter(chapter._id)
+                        .then((data) => {
+                          console.log(data);
+                          setLoader(false);
+                          props.history.push("/novels/" + chapter.novel_id[0]);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </>
+              )}
+            </Grid>
+
+            <Grid item xs={4}></Grid>
+          </Grid>
           <Grid container spacing={3} style={{ marginTop: "30px" }}>
             <Grid
               item
@@ -111,4 +173,4 @@ const SingleChapter = (props) => {
   );
 };
 
-export default SingleChapter;
+export default withRouter(SingleChapter);
