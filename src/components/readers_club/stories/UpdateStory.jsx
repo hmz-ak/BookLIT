@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewStory = (props) => {
+const UpdateStory = (props) => {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");
@@ -202,4 +202,4 @@ const NewStory = (props) => {
   );
 };
 
-export default withRouter(NewStory);
+export default withRouter(UpdateStory);

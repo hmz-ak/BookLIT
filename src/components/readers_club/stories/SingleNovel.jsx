@@ -13,6 +13,7 @@ import Chapters from "../chapters/Chapters";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import libraryService from "../../services/LibraryService";
+import { toast } from "react-toastify";
 
 const SingleNovel = (props) => {
   const [novel, setNovel] = useState([]);
@@ -129,12 +130,13 @@ const SingleNovel = (props) => {
                     variant="contained"
                     color="secondary"
                     onClick={(e) => {
-                      setLoader(true);
                       libraryService
                         .deleteLibrary(novel._id)
                         .then((data) => {
                           console.log(data);
-                          setLoader(false);
+                          toast.info("Removed From Library", {
+                            position: toast.POSITION.TOP_CENTER,
+                          });
                         })
                         .catch((err) => {
                           console.log(err);
@@ -151,12 +153,13 @@ const SingleNovel = (props) => {
                     color="primary"
                     onClick={(e) => {
                       console.log(novel._id);
-                      setLoader(true);
                       libraryService
                         .addLibrary(novel)
                         .then((data) => {
                           console.log(data);
-                          setLoader(false);
+                          toast.info("Added To Library", {
+                            position: toast.POSITION.TOP_CENTER,
+                          });
                         })
                         .catch((err) => {
                           console.log(err);
@@ -191,6 +194,17 @@ const SingleNovel = (props) => {
                         marginRight: "10px",
                       }}
                       variant="contained"
+                      onClick={(e) => {
+                        novelService
+                          .deleteNovel(novel._id)
+                          .then((data) => {
+                            console.log(data);
+                            props.history.push("/");
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                      }}
                     >
                       Delete
                     </Button>
@@ -203,6 +217,9 @@ const SingleNovel = (props) => {
                       }}
                       variant="contained"
                       color="primary"
+                      onClick={(e) => {
+                        props.history.push("/new/chapter/" + novel._id);
+                      }}
                     >
                       Add New Chapter
                     </Button>

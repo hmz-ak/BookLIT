@@ -38,7 +38,7 @@ function App() {
           <Route path="/library" component={Library} />
           <Route path="/genre" component={Genre} />
           <Route path="/newstory" component={NewStory} />
-          <Route path="/" component={LandingPage} />
+          <Route path="/" exact component={LandingPage} />
         </Switch>
         <Footer />
       </div>
