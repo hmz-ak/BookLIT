@@ -75,7 +75,7 @@ const NavBar = (props) => {
               </Link>
             </li>
             <li>
-              <Link to="/" className={classes.link3}>
+              <Link to="/library" className={classes.link3}>
                 LIBRARY
               </Link>
             </li>

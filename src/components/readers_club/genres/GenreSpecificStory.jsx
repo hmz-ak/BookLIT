@@ -1,64 +1,66 @@
-import { Container, Grid } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import genreService from "../../services/GenreService";
-import { withRouter } from "react-router";
-import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import { withRouter } from "react-router";
+
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import React, { useEffect, useState } from "react";
+import genreService from "../../services/GenreService";
+import { Container, Grid } from "@material-ui/core";
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 300,
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     borderRadius: "10px",
   },
   media: {
-    height: 200,
+    height: 300,
   },
 });
-
-const Genre = (props) => {
-  const [genres, setGenres] = useState([]);
+const GenreSpecificStory = (props) => {
+  const [novels, setNovels] = useState([]);
+  const genre = props.match.params.name;
   const classes = useStyles();
 
   useEffect(() => {
     genreService
-      .getGenre()
+      .getSingleGenre(genre)
       .then((data) => {
-        setGenres(data);
+        console.log(data);
+        setNovels(data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  console.log(genres);
 
   return (
     <div>
       <Container maxWidth="lg" style={{ marginTop: "50px" }}>
         <Grid container spacing={3}>
-          {genres.map((genre, index) => {
+          {novels.map((novel, index) => {
             return (
               <Grid item xs={4}>
                 <Card
                   className={classes.root}
                   onClick={(e) => {
-                    props.history.push("/genre/" + genre.name);
+                    props.history.push("/novels/" + novel._id);
                   }}
                 >
                   <CardActionArea>
                     <CardMedia
                       className={classes.media}
-                      image={genre.image}
+                      image={novel.image}
                       title="Contemplative Reptile"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {genre.name}
+                      <Typography style={{ height: "40px" }}>
+                        {novel.name}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -72,4 +74,4 @@ const Genre = (props) => {
   );
 };
 
-export default withRouter(Genre);
+export default withRouter(GenreSpecificStory);

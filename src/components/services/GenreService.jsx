@@ -6,7 +6,7 @@ class GenreService extends GenericService {
   }
 
   getGenre = () => this.get("/api/genre");
-  getSingleGenre = (id) => this.get("/api/genre/" + id);
+  getSingleGenre = (name) => this.get("/api/genre/" + name);
   addGenre = (data) => this.post("/api/genre", data);
   deleteGenre = (_id) => this.delete("/api/genre/delete/" + _id);
   updateGenre = (_id, data) => this.put("/api/genre/update/" + _id, data);
