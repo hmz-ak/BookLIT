@@ -32,6 +32,7 @@ const Library = (props) => {
       .getLibrary()
       .then((data) => {
         setLib(data.novel);
+        console.log(data);
         setLoader(false);
       })
       .catch((err) => {

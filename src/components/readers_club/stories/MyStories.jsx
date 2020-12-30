@@ -32,13 +32,14 @@ const MyStories = (props) => {
     novelService
       .getStories()
       .then((data) => {
-        setStories(data.novel);
+        setStories(data);
         setLoader(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
   console.log(stories);
   return (
     <div>
@@ -69,31 +70,45 @@ const MyStories = (props) => {
       ) : (
         <Container maxWidth="lg" style={{ marginTop: "50px" }}>
           <Grid container spacing={3}>
-            {stories.map((story, index) => {
-              return (
-                <Grid item xs={4} key={index}>
-                  <Card
-                    className={classes.root}
-                    onClick={(e) => {
-                      props.history.push("/novels/" + story._id);
-                    }}
-                  >
-                    <CardActionArea>
-                      <CardMedia
-                        className={classes.media}
-                        image={story.image}
-                        title="Contemplative Reptile"
-                      />
-                      <CardContent>
-                        <Typography style={{ height: "40px" }}>
-                          {story.name}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-              );
-            })}
+            {stories.length != 0 ? (
+              <>
+                {stories.map((story, index) => {
+                  return (
+                    <Grid item xs={4} key={index}>
+                      <Card
+                        className={classes.root}
+                        onClick={(e) => {
+                          props.history.push("/novels/" + story._id);
+                        }}
+                      >
+                        <CardActionArea>
+                          <CardMedia
+                            className={classes.media}
+                            image={story.image}
+                            title="Contemplative Reptile"
+                          />
+                          <CardContent>
+                            <Typography style={{ height: "40px" }}>
+                              {story.name}
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Card>
+                    </Grid>
+                  );
+                })}
+              </>
+            ) : (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "20px",
+                  marginTop: "40px",
+                }}
+              >
+                <strong>You have not written any story yet</strong>
+              </p>
+            )}
           </Grid>
         </Container>
       )}

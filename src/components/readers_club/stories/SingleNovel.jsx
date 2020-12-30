@@ -14,6 +14,7 @@ import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import libraryService from "../../services/LibraryService";
 import { toast } from "react-toastify";
+import { FaWindows } from "react-icons/fa";
 
 const SingleNovel = (props) => {
   const [novel, setNovel] = useState([]);
@@ -137,6 +138,7 @@ const SingleNovel = (props) => {
                           toast.info("Removed From Library", {
                             position: toast.POSITION.TOP_CENTER,
                           });
+                          window.location.reload();
                         })
                         .catch((err) => {
                           console.log(err);
@@ -160,6 +162,7 @@ const SingleNovel = (props) => {
                           toast.info("Added To Library", {
                             position: toast.POSITION.TOP_CENTER,
                           });
+                          window.location.reload();
                         })
                         .catch((err) => {
                           console.log(err);
@@ -198,10 +201,13 @@ const SingleNovel = (props) => {
                       }}
                       variant="contained"
                       onClick={(e) => {
+                        setLoader(true);
                         novelService
                           .deleteNovel(novel._id)
                           .then((data) => {
                             console.log(data);
+                            setLoader(false);
+
                             props.history.push("/");
                           })
                           .catch((err) => {
