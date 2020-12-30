@@ -10,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Auth from "../../auth/Auth";
 
 const useStyles = makeStyles({
   root: {
@@ -41,63 +42,65 @@ const Library = (props) => {
   }, []);
   console.log(lib);
   return (
-    <div>
-      {loader ? (
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid
-              item
-              xs={12}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: "10%",
-                marginBottom: "20%",
-              }}
-            >
-              <Loader
-                type="ThreeDots"
-                color="#00BFFF"
-                height={100}
-                width={100}
-                timeout={6000} //6 secs
-              />
+    <Auth>
+      <div>
+        {loader ? (
+          <Container maxWidth="lg">
+            <Grid container spacing={3}>
+              <Grid
+                item
+                xs={12}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "10%",
+                  marginBottom: "20%",
+                }}
+              >
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={100}
+                  width={100}
+                  timeout={6000} //6 secs
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </Container>
-      ) : (
-        <Container maxWidth="lg" style={{ marginTop: "50px" }}>
-          <Grid container spacing={3}>
-            {lib.map((library, index) => {
-              return (
-                <Grid item xs={4} key={index}>
-                  <Card
-                    className={classes.root}
-                    onClick={(e) => {
-                      props.history.push("/novels/" + library._id);
-                    }}
-                  >
-                    <CardActionArea>
-                      <CardMedia
-                        className={classes.media}
-                        image={library.image}
-                        title="Contemplative Reptile"
-                      />
-                      <CardContent>
-                        <Typography style={{ height: "40px" }}>
-                          {library.name}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Container>
-      )}
-    </div>
+          </Container>
+        ) : (
+          <Container maxWidth="lg" style={{ marginTop: "50px" }}>
+            <Grid container spacing={3}>
+              {lib.map((library, index) => {
+                return (
+                  <Grid item xs={4} key={index}>
+                    <Card
+                      className={classes.root}
+                      onClick={(e) => {
+                        props.history.push("/novels/" + library._id);
+                      }}
+                    >
+                      <CardActionArea>
+                        <CardMedia
+                          className={classes.media}
+                          image={library.image}
+                          title="Contemplative Reptile"
+                        />
+                        <CardContent>
+                          <Typography style={{ height: "40px" }}>
+                            {library.name}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Container>
+        )}
+      </div>
+    </Auth>
   );
 };
 

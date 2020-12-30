@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
-const ImageSlider = ({ slides }) => {
+const ImageSlider = (props) => {
+  const { slides } = props;
   const [current, setCurrent] = useState(0);
   const length = slides.length;
 
@@ -25,17 +27,26 @@ const ImageSlider = ({ slides }) => {
 
       {slides.map((slide, index) => {
         return (
-          <Link to="/" key={index}>
-            <div className={index === current ? "slide active" : "slide"}>
-              {index === current && (
-                <img src={slide.image} alt="travel image" className="image" />
-              )}
-            </div>
-          </Link>
+          <div
+            style={{ cursor: "pointer" }}
+            key={index}
+            className={index === current ? "slide active" : "slide"}
+          >
+            {index === current && (
+              <img
+                src={slide.image}
+                alt="travel image"
+                className="image"
+                onClick={(e) => {
+                  props.history.push("/novels/" + slide._id);
+                }}
+              />
+            )}
+          </div>
         );
       })}
     </section>
   );
 };
 
-export default ImageSlider;
+export default withRouter(ImageSlider);

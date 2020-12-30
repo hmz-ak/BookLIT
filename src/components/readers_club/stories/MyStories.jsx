@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import novelService from "../../services/NovelService";
+import Auth from "../../auth/Auth";
 
 const useStyles = makeStyles({
   root: {
@@ -42,77 +43,79 @@ const MyStories = (props) => {
 
   console.log(stories);
   return (
-    <div>
-      {loader ? (
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid
-              item
-              xs={12}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: "10%",
-                marginBottom: "20%",
-              }}
-            >
-              <Loader
-                type="ThreeDots"
-                color="#00BFFF"
-                height={100}
-                width={100}
-                timeout={6000} //6 secs
-              />
-            </Grid>
-          </Grid>
-        </Container>
-      ) : (
-        <Container maxWidth="lg" style={{ marginTop: "50px" }}>
-          <Grid container spacing={3}>
-            {stories.length != 0 ? (
-              <>
-                {stories.map((story, index) => {
-                  return (
-                    <Grid item xs={4} key={index}>
-                      <Card
-                        className={classes.root}
-                        onClick={(e) => {
-                          props.history.push("/novels/" + story._id);
-                        }}
-                      >
-                        <CardActionArea>
-                          <CardMedia
-                            className={classes.media}
-                            image={story.image}
-                            title="Contemplative Reptile"
-                          />
-                          <CardContent>
-                            <Typography style={{ height: "40px" }}>
-                              {story.name}
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Card>
-                    </Grid>
-                  );
-                })}
-              </>
-            ) : (
-              <p
+    <Auth>
+      <div>
+        {loader ? (
+          <Container maxWidth="lg">
+            <Grid container spacing={3}>
+              <Grid
+                item
+                xs={12}
                 style={{
-                  textAlign: "center",
-                  fontSize: "20px",
-                  marginTop: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "10%",
+                  marginBottom: "20%",
                 }}
               >
-                <strong>You have not written any story yet</strong>
-              </p>
-            )}
-          </Grid>
-        </Container>
-      )}
-    </div>
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={100}
+                  width={100}
+                  timeout={6000} //6 secs
+                />
+              </Grid>
+            </Grid>
+          </Container>
+        ) : (
+          <Container maxWidth="lg" style={{ marginTop: "50px" }}>
+            <Grid container spacing={3}>
+              {stories.length != 0 ? (
+                <>
+                  {stories.map((story, index) => {
+                    return (
+                      <Grid item xs={4} key={index}>
+                        <Card
+                          className={classes.root}
+                          onClick={(e) => {
+                            props.history.push("/novels/" + story._id);
+                          }}
+                        >
+                          <CardActionArea>
+                            <CardMedia
+                              className={classes.media}
+                              image={story.image}
+                              title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                              <Typography style={{ height: "40px" }}>
+                                {story.name}
+                              </Typography>
+                            </CardContent>
+                          </CardActionArea>
+                        </Card>
+                      </Grid>
+                    );
+                  })}
+                </>
+              ) : (
+                <p
+                  style={{
+                    textAlign: "center",
+                    fontSize: "20px",
+                    marginTop: "40px",
+                  }}
+                >
+                  <strong>You have not written any story yet</strong>
+                </p>
+              )}
+            </Grid>
+          </Container>
+        )}
+      </div>
+    </Auth>
   );
 };
 
