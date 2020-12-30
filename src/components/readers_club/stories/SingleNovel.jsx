@@ -15,6 +15,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import libraryService from "../../services/LibraryService";
 import { toast } from "react-toastify";
 import { FaWindows } from "react-icons/fa";
+import Auth from "../../auth/Auth";
 
 const SingleNovel = (props) => {
   const [novel, setNovel] = useState([]);
@@ -42,234 +43,236 @@ const SingleNovel = (props) => {
   }, [trigger]);
 
   return (
-    <div>
-      {loader ? (
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid
-              item
-              xs={12}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: "10%",
-                marginBottom: "20%",
-              }}
-            >
-              <Loader
-                type="ThreeDots"
-                color="#00BFFF"
-                height={100}
-                width={100}
-                timeout={6000} //6 secs
-              />
-            </Grid>
-          </Grid>
-        </Container>
-      ) : (
-        <>
-          <Grid container spacing={2} style={{ marginTop: "30px" }}>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={3}>
-              <img
-                className="image3"
-                width="300px"
-                height="400px"
-                src={novel.image}
-                alt=""
-              />
-            </Grid>
-            <Grid item xs={7}>
-              Name <strong>{novel.name}</strong>
-              <br />
-              <br />
-              Genre <strong>{novel.genre}</strong>
-              <br />
-              <br />
-              Written by <strong>{user_info.name}</strong>
-              <hr style={{ marginTop: "30px" }} />
-              <br />
-              <br />
-              <Typography variant="h5">Theme of the story</Typography>
-              <Typography variant="body2" style={{ marginTop: "15px" }}>
-                {novel.theme}
-              </Typography>
-            </Grid>
-          </Grid>
-          {userService.isLoggedIn() && (
+    <Auth>
+      <div>
+        {loader ? (
+          <Container maxWidth="lg">
             <Grid container spacing={3}>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={5}>
-                {!chapters.length == 0 && (
-                  <Button
-                    style={{
-                      marginTop: "30px",
-                      marginRight: "20px",
-                      backgroundColor: "darkorange",
-                      color: "white",
-                    }}
-                    variant="contained"
-                    onClick={(e) => {
-                      chapterService
-                        .getSingleChapter(chapters[0]._id)
-                        .then((data) => {
-                          console.log(data);
-                          props.history.push("/chapter/" + data.chapter._id);
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                    }}
-                  >
-                    Read Now
-                  </Button>
-                )}
-                {!library.length == 0 ? (
-                  <Button
-                    style={{ marginTop: "30px" }}
-                    variant="contained"
-                    color="secondary"
-                    onClick={(e) => {
-                      libraryService
-                        .deleteLibrary(novel._id)
-                        .then((data) => {
-                          console.log(data);
-                          toast.info("Removed From Library", {
-                            position: toast.POSITION.TOP_CENTER,
-                          });
-                          window.location.reload();
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                      setTrigger(false);
-                    }}
-                  >
-                    Remove From Library
-                  </Button>
-                ) : (
-                  <Button
-                    style={{ marginTop: "30px" }}
-                    variant="contained"
-                    color="primary"
-                    onClick={(e) => {
-                      console.log(novel._id);
-                      libraryService
-                        .addLibrary(novel)
-                        .then((data) => {
-                          console.log(data);
-                          toast.info("Added To Library", {
-                            position: toast.POSITION.TOP_CENTER,
-                          });
-                          window.location.reload();
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                      setTrigger(true);
-                    }}
-                  >
-                    Add To Library
-                  </Button>
-                )}
+              <Grid
+                item
+                xs={12}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "10%",
+                  marginBottom: "20%",
+                }}
+              >
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={100}
+                  width={100}
+                  timeout={10000} //10 secs
+                />
               </Grid>
-
-              <Grid item xs={6}>
-                {novel.user_id == userService.getLoggedInUser()._id && (
-                  <>
+            </Grid>
+          </Container>
+        ) : (
+          <>
+            <Grid container spacing={2} style={{ marginTop: "30px" }}>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={3}>
+                <img
+                  className="image3"
+                  width="300px"
+                  height="400px"
+                  src={novel.image}
+                  alt=""
+                />
+              </Grid>
+              <Grid item xs={7}>
+                Name <strong>{novel.name}</strong>
+                <br />
+                <br />
+                Genre <strong>{novel.genre}</strong>
+                <br />
+                <br />
+                Written by <strong>{user_info.name}</strong>
+                <hr style={{ marginTop: "30px" }} />
+                <br />
+                <br />
+                <Typography variant="h5">Theme of the story</Typography>
+                <Typography variant="body2" style={{ marginTop: "15px" }}>
+                  {novel.theme}
+                </Typography>
+              </Grid>
+            </Grid>
+            {userService.isLoggedIn() && (
+              <Grid container spacing={3}>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={5}>
+                  {!chapters.length == 0 && (
                     <Button
                       style={{
                         marginTop: "30px",
-                        backgroundColor: "goldenrod",
+                        marginRight: "20px",
+                        backgroundColor: "darkorange",
                         color: "white",
-                        marginRight: "10px",
                       }}
                       variant="contained"
                       onClick={(e) => {
-                        props.history.push("/novels/update/" + novel._id);
-                      }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      style={{
-                        marginTop: "30px",
-                        backgroundColor: "indianred",
-                        color: "white",
-                        marginRight: "10px",
-                      }}
-                      variant="contained"
-                      onClick={(e) => {
-                        setLoader(true);
-                        novelService
-                          .deleteNovel(novel._id)
+                        chapterService
+                          .getSingleChapter(chapters[0]._id)
                           .then((data) => {
                             console.log(data);
-                            setLoader(false);
-
-                            props.history.push("/");
+                            props.history.push("/chapter/" + data.chapter._id);
                           })
                           .catch((err) => {
                             console.log(err);
                           });
                       }}
                     >
-                      Delete
+                      Read Now
                     </Button>
+                  )}
+                  {!library.length == 0 ? (
                     <Button
-                      style={{
-                        marginTop: "30px",
-                        backgroundColor: "mediumvioletred",
-                        color: "white",
-                        marginRight: "10px",
+                      style={{ marginTop: "30px" }}
+                      variant="contained"
+                      color="secondary"
+                      onClick={(e) => {
+                        libraryService
+                          .deleteLibrary(novel._id)
+                          .then((data) => {
+                            console.log(data);
+                            toast.info("Removed From Library", {
+                              position: toast.POSITION.TOP_CENTER,
+                            });
+                            window.location.reload();
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                        setTrigger(false);
                       }}
+                    >
+                      Remove From Library
+                    </Button>
+                  ) : (
+                    <Button
+                      style={{ marginTop: "30px" }}
                       variant="contained"
                       color="primary"
                       onClick={(e) => {
-                        props.history.push("/new/chapter/" + novel._id);
+                        console.log(novel._id);
+                        libraryService
+                          .addLibrary(novel)
+                          .then((data) => {
+                            console.log(data);
+                            toast.info("Added To Library", {
+                              position: toast.POSITION.TOP_CENTER,
+                            });
+                            window.location.reload();
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                        setTrigger(true);
                       }}
                     >
-                      Add New Chapter
+                      Add To Library
                     </Button>
-                  </>
-                )}
-              </Grid>
-            </Grid>
-          )}
-
-          <Divider style={{ marginTop: "50px", marginBottom: "20px" }} />
-          {!chapters.length == 0 ? (
-            <>
-              <Grid container spacing={4}>
-                <Grid item xs={5}></Grid>
-                <Grid item xs={4}>
-                  <h2>TABLE OF CONTENTS</h2>
+                  )}
                 </Grid>
-                <Grid item xs={3}></Grid>
-              </Grid>
 
-              <Grid container spacing={3}>
-                <Grid item xs={4}></Grid>
-                <Grid item xs={8}>
-                  <Chapters chapters={chapters} />
+                <Grid item xs={6}>
+                  {novel.user_id == userService.getLoggedInUser()._id && (
+                    <>
+                      <Button
+                        style={{
+                          marginTop: "30px",
+                          backgroundColor: "goldenrod",
+                          color: "white",
+                          marginRight: "10px",
+                        }}
+                        variant="contained"
+                        onClick={(e) => {
+                          props.history.push("/novels/update/" + novel._id);
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        style={{
+                          marginTop: "30px",
+                          backgroundColor: "indianred",
+                          color: "white",
+                          marginRight: "10px",
+                        }}
+                        variant="contained"
+                        onClick={(e) => {
+                          setLoader(true);
+                          novelService
+                            .deleteNovel(novel._id)
+                            .then((data) => {
+                              console.log(data);
+                              setLoader(false);
+
+                              props.history.push("/");
+                            })
+                            .catch((err) => {
+                              console.log(err);
+                            });
+                        }}
+                      >
+                        Delete
+                      </Button>
+                      <Button
+                        style={{
+                          marginTop: "30px",
+                          backgroundColor: "mediumvioletred",
+                          color: "white",
+                          marginRight: "10px",
+                        }}
+                        variant="contained"
+                        color="primary"
+                        onClick={(e) => {
+                          props.history.push("/new/chapter/" + novel._id);
+                        }}
+                      >
+                        Add New Chapter
+                      </Button>
+                    </>
+                  )}
                 </Grid>
               </Grid>
-            </>
-          ) : (
-            <p
-              style={{
-                textAlign: "center",
-                fontSize: "20px",
-                marginTop: "40px",
-              }}
-            >
-              <strong>This story does not have any chapters yet!</strong>
-            </p>
-          )}
-        </>
-      )}
-    </div>
+            )}
+
+            <Divider style={{ marginTop: "50px", marginBottom: "20px" }} />
+            {!chapters.length == 0 ? (
+              <>
+                <Grid container spacing={4}>
+                  <Grid item xs={5}></Grid>
+                  <Grid item xs={4}>
+                    <h2>TABLE OF CONTENTS</h2>
+                  </Grid>
+                  <Grid item xs={3}></Grid>
+                </Grid>
+
+                <Grid container spacing={3}>
+                  <Grid item xs={4}></Grid>
+                  <Grid item xs={8}>
+                    <Chapters chapters={chapters} />
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "20px",
+                  marginTop: "40px",
+                }}
+              >
+                <strong>This story does not have any chapters yet!</strong>
+              </p>
+            )}
+          </>
+        )}
+      </div>
+    </Auth>
   );
 };
 

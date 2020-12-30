@@ -50,8 +50,8 @@ const NavBar = (props) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" style={{ background: "#FFFFFF" }}>
+    <div className={classes.root} style={{ marginBottom: "7%" }}>
+      <AppBar position="fixed" style={{ background: "#FFFFFF" }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link to="/" className={classes.link2}>

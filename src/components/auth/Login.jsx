@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
 import userService from "../services/UserService";
@@ -20,6 +20,11 @@ const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    toast.info("You need to Log In!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }, []);
   return (
     <div className={classes.container}>
       <div className={classes.child}>
