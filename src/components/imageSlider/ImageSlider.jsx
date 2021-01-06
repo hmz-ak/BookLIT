@@ -23,7 +23,7 @@ const ImageSlider = (props) => {
 
   return (
     <section className="slider">
-      <Grid container spacing={3}>
+      <Grid container>
         <Grid item xs={3} lg={2}>
           <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
         </Grid>

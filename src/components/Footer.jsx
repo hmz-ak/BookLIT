@@ -16,9 +16,9 @@ function Foot({ text }) {
 const Footer = () => {
   return (
     <div style={{ marginTop: "60px" }} className="footer">
-      <Grid container spacing={3}>
-        <Grid item xs={2}></Grid>
-        <Grid item xs={10}>
+      <Grid container>
+        <Grid item lg={2}></Grid>
+        <Grid item xs={12} lg={10}>
           <ul id="menu">
             <Foot text={"Paid Stories"} />
             <Foot text={"Try Premium"} />
