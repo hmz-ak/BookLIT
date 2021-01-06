@@ -5,20 +5,14 @@ const TextHeading = ({ text }) => {
   return (
     <div style={{ marginTop: "40px" }}>
       <Container>
-        <Grid container spacing={3}>
-          <Grid item xs={1}></Grid>
-          <Grid item xs={8}>
-            <p
-              style={{
-                fontSize: "32px",
-                fontWeight: "700",
-                marginLeft: "-49px",
-              }}
-            >
-              {text}
-            </p>
-          </Grid>
-        </Grid>
+        <p
+          style={{
+            fontSize: "2.5vw",
+            fontWeight: "700",
+          }}
+        >
+          {text}
+        </p>
       </Container>
     </div>
   );

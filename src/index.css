@@ -19,7 +19,10 @@ body {
 
 .image2 {
   border-radius: 10px;
+  height: 310px;
+
   width: 220px;
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 15px;
 }
@@ -102,5 +105,26 @@ ul#menu li {
     z-index: 10;
     cursor: pointer;
     user-select: none;
+  }
+}
+
+@media only screen and (max-width: 1149px) {
+  .image2 {
+    border-radius: 10px;
+    height: 270px;
+    width: 180px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .image2 {
+    border-radius: 10px;
+    height: 210px;
+
+    width: 140px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 15px;
   }
 }

@@ -4,8 +4,10 @@ import Chip from "@material-ui/core/Chip";
 import { withRouter } from "react-router";
 
 const breakPoints = [
-  { width: 1, itemsToShow: 1 },
-  { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
+  { width: 378, itemsToShow: 1 },
+  { width: 450, itemsToShow: 2 },
+
+  { width: 550, itemsToShow: 3, itemsToScroll: 2 },
   { width: 786, itemsToShow: 4 },
   { width: 1200, itemsToShow: 6 },
 ];
@@ -28,7 +30,6 @@ const ItemsSlider = (props) => {
                     console.log(novel._id);
                     props.history.push("/novels/" + novel._id);
                   }}
-                  height="310px"
                   className="image2"
                   src={novel.image}
                 />
