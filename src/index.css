@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+  padding: 0;
+}
 .slider {
   position: relative;
   height: 80vh;
@@ -70,4 +74,10 @@
 ul#menu li {
   display: inline;
   color: black;
+}
+
+@media only screen and (max-width: 1149px) {
+  #blackDiv {
+    display: none;
+  }
 }

@@ -73,7 +73,7 @@ const SingleNovel = (props) => {
           <>
             <Grid container spacing={2} style={{ marginTop: "30px" }}>
               <Grid item xs={1}></Grid>
-              <Grid item xs={3}>
+              <Grid item md={11} lg={3}>
                 <img
                   className="image3"
                   width="300px"
@@ -82,7 +82,7 @@ const SingleNovel = (props) => {
                   alt=""
                 />
               </Grid>
-              <Grid item xs={7}>
+              <Grid item xs={12} md={11} lg={7}>
                 Name <strong>{novel.name}</strong>
                 <br />
                 <br />

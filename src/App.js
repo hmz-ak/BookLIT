@@ -1,4 +1,4 @@
-import NavBar from "./components/NavBar";
+import Nav1 from "./components/Nav1";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -30,7 +30,7 @@ function App() {
       <div>
         <ToastContainer />
 
-        <NavBar />
+        <Nav1 />
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/genre/:name" component={GenreSpecificStory} />
