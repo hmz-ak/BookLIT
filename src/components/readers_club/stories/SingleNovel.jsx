@@ -71,9 +71,9 @@ const SingleNovel = (props) => {
           </Container>
         ) : (
           <>
-            <Grid container spacing={2} style={{ marginTop: "30px" }}>
+            <Grid container style={{ marginTop: "30px" }}>
               <Grid item xs={1}></Grid>
-              <Grid item md={11} lg={3}>
+              <Grid item xs={10} md={10} lg={1}>
                 <img
                   className="image3"
                   width="300px"
@@ -82,7 +82,10 @@ const SingleNovel = (props) => {
                   alt=""
                 />
               </Grid>
-              <Grid item xs={12} md={11} lg={7}>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10} md={11} lg={7}>
+                <br />
                 Name <strong>{novel.name}</strong>
                 <br />
                 <br />
@@ -102,7 +105,7 @@ const SingleNovel = (props) => {
             {userService.isLoggedIn() && (
               <Grid container spacing={3}>
                 <Grid item xs={1}></Grid>
-                <Grid item xs={5}>
+                <Grid item xs={11} md={5}>
                   {!chapters.length == 0 && (
                     <Button
                       style={{
@@ -112,6 +115,7 @@ const SingleNovel = (props) => {
                         color: "white",
                       }}
                       variant="contained"
+                      size="small"
                       onClick={(e) => {
                         chapterService
                           .getSingleChapter(chapters[0]._id)
@@ -132,6 +136,7 @@ const SingleNovel = (props) => {
                       style={{ marginTop: "30px" }}
                       variant="contained"
                       color="secondary"
+                      size="small"
                       onClick={(e) => {
                         libraryService
                           .deleteLibrary(novel._id)
@@ -155,6 +160,7 @@ const SingleNovel = (props) => {
                       style={{ marginTop: "30px" }}
                       variant="contained"
                       color="primary"
+                      size="small"
                       onClick={(e) => {
                         console.log(novel._id);
                         libraryService
@@ -176,11 +182,12 @@ const SingleNovel = (props) => {
                     </Button>
                   )}
                 </Grid>
-
-                <Grid item xs={6}>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={11} md={5}>
                   {novel.user_id == userService.getLoggedInUser()._id && (
                     <>
                       <Button
+                        size="small"
                         style={{
                           marginTop: "30px",
                           backgroundColor: "goldenrod",
@@ -195,6 +202,7 @@ const SingleNovel = (props) => {
                         Edit
                       </Button>
                       <Button
+                        size="small"
                         style={{
                           marginTop: "30px",
                           backgroundColor: "indianred",
@@ -220,6 +228,7 @@ const SingleNovel = (props) => {
                         Delete
                       </Button>
                       <Button
+                        size="small"
                         style={{
                           marginTop: "30px",
                           backgroundColor: "mediumvioletred",
@@ -232,7 +241,7 @@ const SingleNovel = (props) => {
                           props.history.push("/new/chapter/" + novel._id);
                         }}
                       >
-                        Add New Chapter
+                        New Chapter
                       </Button>
                     </>
                   )}
@@ -243,16 +252,16 @@ const SingleNovel = (props) => {
             <Divider style={{ marginTop: "50px", marginBottom: "20px" }} />
             {!chapters.length == 0 ? (
               <>
-                <Grid container spacing={4}>
-                  <Grid item xs={5}></Grid>
-                  <Grid item xs={4}>
+                <Grid container>
+                  <Grid item xs={3} md={4}></Grid>
+                  <Grid item xs={6}>
                     <h2>TABLE OF CONTENTS</h2>
                   </Grid>
                   <Grid item xs={3}></Grid>
                 </Grid>
 
                 <Grid container spacing={3}>
-                  <Grid item xs={4}></Grid>
+                  <Grid item xs={3} md={4}></Grid>
                   <Grid item xs={8}>
                     <Chapters chapters={chapters} />
                   </Grid>
