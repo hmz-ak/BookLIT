@@ -76,7 +76,7 @@ const MyStories = (props) => {
                 <>
                   {stories.map((story, index) => {
                     return (
-                      <Grid item xs={4} key={index}>
+                      <Grid item xs={12} md={4} key={index}>
                         <Card
                           className={classes.root}
                           onClick={(e) => {

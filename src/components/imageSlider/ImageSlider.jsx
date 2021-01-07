@@ -24,10 +24,10 @@ const ImageSlider = (props) => {
   return (
     <section className="slider">
       <Grid container>
-        <Grid item xs={3} lg={2}>
+        <Grid item xs={2} lg={2}>
           <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
         </Grid>
-        <Grid item xs={6} lg={8}>
+        <Grid item xs={8} lg={8}>
           {slides.map((slide, index) => {
             return (
               <div
@@ -49,7 +49,7 @@ const ImageSlider = (props) => {
             );
           })}
         </Grid>
-        <Grid item xs={3} lg={3}>
+        <Grid item xs={2} lg={3}>
           <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
         </Grid>
       </Grid>
