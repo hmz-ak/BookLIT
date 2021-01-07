@@ -11,16 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Auth from "../../auth/Auth";
-
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 330,
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     borderRadius: "10px",
   },
   media: {
-    height: 200,
+    height: 180,
   },
 });
 
@@ -75,7 +74,7 @@ const Genre = (props) => {
             <Grid container spacing={3}>
               {genres.map((genre, index) => {
                 return (
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <Card
                       className={classes.root}
                       onClick={(e) => {
