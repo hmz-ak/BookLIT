@@ -26,6 +26,7 @@ const Register = () => {
       <div className={classes.child}>
         <TextField
           label="name"
+          required
           fullWidth
           value={name}
           onChange={(e) => {
@@ -36,6 +37,7 @@ const Register = () => {
         <TextField
           label="email"
           fullWidth
+          required
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
@@ -45,6 +47,7 @@ const Register = () => {
         <TextField
           label="password"
           type="password"
+          required
           fullWidth
           value={password}
           onChange={(e) => {
@@ -57,18 +60,24 @@ const Register = () => {
           color="primary"
           style={{ marginTop: 20 }}
           onClick={(e) => {
-            userService
-              .register(name, email, password)
-              .then((data) => {
-                console.log(data);
-                window.location.href = "/login";
-              })
-              .catch((err) => {
-                console.log(err);
-                toast.error(err.response.data, {
-                  position: toast.POSITION.TOP_CENTER,
+            if (name !== "" && email !== "" && password !== "") {
+              userService
+                .register(name, email, password)
+                .then((data) => {
+                  console.log(data);
+                  window.location.href = "/login";
+                })
+                .catch((err) => {
+                  console.log(err);
+                  toast.error(err.response.data, {
+                    position: toast.POSITION.TOP_CENTER,
+                  });
                 });
+            } else {
+              toast.error("Fill All The Fields", {
+                position: toast.POSITION.TOP_CENTER,
               });
+            }
           }}
         >
           Register

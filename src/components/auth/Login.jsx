@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
 import userService from "../services/UserService";
 import { toast } from "react-toastify";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = (props) => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +33,7 @@ const Login = () => {
           label="email"
           fullWidth
           value={email}
+          required
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -41,6 +43,7 @@ const Login = () => {
           label="password"
           type="password"
           fullWidth
+          required
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
@@ -52,26 +55,46 @@ const Login = () => {
           color="primary"
           style={{ marginTop: 20 }}
           onClick={(e) => {
-            userService
-              .login(email, password)
-              .then((data) => {
-                console.log(data);
+            if (email !== "" && password !== "") {
+              userService
+                .login(email, password)
+                .then((data) => {
+                  console.log(data);
 
-                window.location.href = "/";
-              })
-              .catch((err) => {
-                console.log(err);
-                toast.error(err.response.data, {
-                  position: toast.POSITION.TOP_CENTER,
+                  window.location.href = "/";
+                })
+                .catch((err) => {
+                  console.log(err);
+                  toast.error(err.response.data, {
+                    position: toast.POSITION.TOP_CENTER,
+                  });
                 });
+            } else {
+              toast.error("Fill All The Fields", {
+                position: toast.POSITION.TOP_CENTER,
               });
+            }
           }}
         >
           Login
         </Button>
+        <p>
+          Not a user yet?{" "}
+          <span
+            style={{
+              cursor: "pointer",
+              color: "indigo",
+            }}
+            onClick={(e) => {
+              props.history.push("/register");
+            }}
+          >
+            Register Now!
+          </span>
+        </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default withRouter(Login);
