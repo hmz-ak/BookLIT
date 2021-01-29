@@ -13,13 +13,13 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Auth from "../../auth/Auth";
 const useStyles = makeStyles({
   root: {
-    maxWidth: 330,
+    maxWidth: 300,
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     borderRadius: "10px",
   },
   media: {
-    height: 180,
+    height: 170,
   },
 });
 
@@ -71,10 +71,10 @@ const Genre = (props) => {
           </Container>
         ) : (
           <Container maxWidth="lg" style={{ marginTop: "50px" }}>
-            <Grid container spacing={3}>
+            <Grid container spacing={4}>
               {genres.map((genre, index) => {
                 return (
-                  <Grid item xs={12} md={4}>
+                  <Grid item xs={6} md={3}>
                     <Card
                       className={classes.root}
                       onClick={(e) => {

@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     borderRadius: "10px",
   },
   media: {
-    height: 300,
+    height: 170,
   },
 });
 const GenreSpecificStory = (props) => {
@@ -73,10 +73,10 @@ const GenreSpecificStory = (props) => {
         </Container>
       ) : (
         <Container maxWidth="lg" style={{ marginTop: "50px" }}>
-          <Grid container spacing={3}>
+          <Grid container spacing={4}>
             {novels.map((novel, index) => {
               return (
-                <Grid item xs={4}>
+                <Grid item xs={6} md={3}>
                   <Card
                     className={classes.root}
                     onClick={(e) => {
