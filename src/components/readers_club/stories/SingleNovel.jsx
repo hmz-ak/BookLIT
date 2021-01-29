@@ -47,7 +47,7 @@ const SingleNovel = (props) => {
       <div>
         {loader ? (
           <Container maxWidth="lg">
-            <Grid container spacing={3}>
+            <Grid container>
               <Grid
                 item
                 xs={12}
@@ -84,7 +84,7 @@ const SingleNovel = (props) => {
               </Grid>
               <Grid item xs={1}></Grid>
               <Grid item xs={1}></Grid>
-              <Grid item xs={10} md={11} lg={7}>
+              <Grid item xs={10} lg={7}>
                 <br />
                 Name <strong>{novel.name}</strong>
                 <br />
@@ -103,7 +103,7 @@ const SingleNovel = (props) => {
               </Grid>
             </Grid>
             {userService.isLoggedIn() && (
-              <Grid container spacing={3}>
+              <Grid container>
                 <Grid item xs={1}></Grid>
                 <Grid item xs={11} md={5}>
                   {!chapters.length == 0 && (
@@ -185,7 +185,7 @@ const SingleNovel = (props) => {
                 <Grid item xs={1}></Grid>
                 <Grid item xs={11} md={5}>
                   {novel.user_id == userService.getLoggedInUser()._id && (
-                    <>
+                    <div>
                       <Button
                         size="small"
                         style={{
@@ -243,7 +243,7 @@ const SingleNovel = (props) => {
                       >
                         New Chapter
                       </Button>
-                    </>
+                    </div>
                   )}
                 </Grid>
               </Grid>
@@ -251,7 +251,7 @@ const SingleNovel = (props) => {
 
             <Divider style={{ marginTop: "50px", marginBottom: "20px" }} />
             {!chapters.length == 0 ? (
-              <>
+              <div>
                 <Grid container>
                   <Grid item xs={3} md={4}></Grid>
                   <Grid item xs={6}>
@@ -260,13 +260,13 @@ const SingleNovel = (props) => {
                   <Grid item xs={3}></Grid>
                 </Grid>
 
-                <Grid container spacing={3}>
+                <Grid container>
                   <Grid item xs={3} md={4}></Grid>
                   <Grid item xs={8}>
                     <Chapters chapters={chapters} />
                   </Grid>
                 </Grid>
-              </>
+              </div>
             ) : (
               <p
                 style={{
