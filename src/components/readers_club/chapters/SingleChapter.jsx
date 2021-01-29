@@ -33,7 +33,7 @@ const SingleChapter = (props) => {
     <div>
       {loader ? (
         <Container maxWidth="lg">
-          <Grid container spacing={3}>
+          <Grid container>
             <Grid
               item
               xs={12}
@@ -57,7 +57,7 @@ const SingleChapter = (props) => {
         </Container>
       ) : (
         <>
-          <Grid container spacing={3}>
+          <Grid container>
             <Grid item xs={4}></Grid>
             <Grid
               item
@@ -110,10 +110,11 @@ const SingleChapter = (props) => {
 
             <Grid item xs={4}></Grid>
           </Grid>
-          <Grid container spacing={3} style={{ marginTop: "30px" }}>
+          <Grid container style={{ marginTop: "30px" }}>
+            <Grid item xs={1}></Grid>
             <Grid
               item
-              xs={12}
+              xs={10}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -130,9 +131,10 @@ const SingleChapter = (props) => {
                 alt=""
               />
             </Grid>
+            <Grid item xs={1}></Grid>
           </Grid>
 
-          <Grid container spacing={3}>
+          <Grid container>
             <Grid item xs={12}>
               <Typography
                 variant="h3"
@@ -140,10 +142,10 @@ const SingleChapter = (props) => {
                 style={{
                   position: "absolute",
                   textAlign: "center",
-                  bottom: "30%",
+                  top: "30%",
                   width: "100%",
+                  height: "100%",
                   color: "whitesmoke",
-
                   fontWeight: "bold",
                 }}
               >
@@ -151,22 +153,28 @@ const SingleChapter = (props) => {
               </Typography>
             </Grid>
           </Grid>
-          <Container
-            maxWidth="lg"
-            className="shadow"
-            style={{
-              marginTop: "40px",
-              padding: "30px",
-            }}
-          >
-            <Typography
-              variant="h4"
-              component="h3"
-              style={{ lineHeight: 1.8, fontSize: "25px" }}
-            >
-              {chapter.content}
-            </Typography>
-          </Container>
+          <Grid container>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10}>
+              <Container
+                maxWidth="lg"
+                className="shadow"
+                style={{
+                  marginTop: "40px",
+                  padding: "30px",
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  component="h3"
+                  style={{ lineHeight: 1.8, fontSize: "25px" }}
+                >
+                  {chapter.content}
+                </Typography>
+              </Container>
+            </Grid>
+            <Grid item xs={1}></Grid>
+          </Grid>
         </>
       )}
     </div>
