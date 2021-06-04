@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import userService from "./services/UserService";
 
 const useStyles = makeStyles((theme) => ({
@@ -193,6 +194,18 @@ const Nav1 = (props) => {
             </IconButton>
             <p>Stories</p>
           </MenuItem>
+          <MenuItem>
+            <IconButton
+              onClick={(e) => {
+                props.history.push("/");
+              }}
+              color="inherit"
+            >
+              <ShoppingCartIcon />
+            </IconButton>
+            <p>Cart</p>
+          </MenuItem>
+
           <MenuItem
             onClick={(e) => {
               userService.logout();
@@ -316,6 +329,14 @@ const Nav1 = (props) => {
               <div>
                 <IconButton onClick={handleProfileMenuOpen} color="inherit">
                   <MenuBookIcon />
+                </IconButton>
+                <IconButton
+                  onClick={(e) => {
+                    props.history.push("/");
+                  }}
+                  color="inherit"
+                >
+                  <ShoppingCartIcon />
                 </IconButton>
                 <Button
                   style={{ marginLeft: "20px" }}

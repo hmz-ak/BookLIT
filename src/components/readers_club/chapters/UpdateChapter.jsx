@@ -148,7 +148,7 @@ const UpdateChapter = (props) => {
               <br />
               <br />
               <Button variant="contained" color="primary" type="submit">
-                Add
+                Update
               </Button>
             </form>
           </div>
