@@ -8,7 +8,10 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import novelService from "../../services/NovelService";
 import { withRouter } from "react-router";
-
+import Switch from "@material-ui/core/Switch";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Auth from "../../auth/Auth";
@@ -35,6 +38,8 @@ const NewStory = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [paid, setPaid] = useState(false);
+  const [paidValue, setPaidValue] = useState(0);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -52,7 +57,15 @@ const NewStory = (props) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(selectedGenre);
+
+  useEffect(() => {
+    if (paidValue == "") {
+      setPaidValue(0);
+    }
+    console.log(`count changed to ${paidValue}`);
+    console.log(`paid changed to ${paid}`);
+  }, [paidValue, paid]);
+  // console.log(selectedGenre);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,6 +77,8 @@ const NewStory = (props) => {
       formData.append("genre", selectedGenre);
       formData.append("theme", theme);
       formData.append("image", file);
+      formData.append("paid", paid);
+      formData.append("price", paidValue);
       const config = {
         headers: {
           "content-type": "multipart/form-data",
@@ -117,6 +132,8 @@ const NewStory = (props) => {
         ) : (
           <div className={classes.child}>
             <form onSubmit={handleSubmit}>
+              <br />
+              <br />
               <TextField
                 label="title"
                 fullWidth
@@ -164,6 +181,36 @@ const NewStory = (props) => {
                   );
                 })}
               </Menu>
+              <br />
+              <br />
+              <FormControl component="fieldset">
+                <FormGroup aria-label="position" row>
+                  <FormControlLabel
+                    onClick={(e) => {
+                      setPaid(!paid);
+                      console.log(paid);
+                    }}
+                    value={paid}
+                    control={<Switch color="primary" />}
+                    label="Paid?"
+                    labelPlacement="start"
+                  />
+                  {paid ? (
+                    <TextField
+                      style={{ marginLeft: 20 }}
+                      id="standard-basic"
+                      label="Enter Amount"
+                      onChange={(e) => {
+                        setPaidValue(e.target.value);
+
+                        console.log(paidValue);
+                      }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </FormGroup>
+              </FormControl>
               <br />
               <br />
               <TextField

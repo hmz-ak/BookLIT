@@ -8,7 +8,10 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import novelService from "../../services/NovelService";
 import { withRouter } from "react-router";
-
+import Switch from "@material-ui/core/Switch";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Auth from "../../auth/Auth";
@@ -34,6 +37,8 @@ const UpdateStory = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [paid, setPaid] = useState(false);
+  const [paidValue, setPaidValue] = useState(0);
 
   const id = props.match.params.id;
   const handleClick = (event) => {
@@ -62,12 +67,19 @@ const UpdateStory = (props) => {
         setName(data.novel.name);
         setTheme(data.novel.theme);
         setSelectedGenre(data.novel.genre);
+        setPaid(data.novel.paid);
+        setPaidValue(data.novel.price);
         setLoader(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    console.log(`count changed to ${paidValue}`);
+    console.log(`paid changed to ${paid}`);
+  }, [paidValue, paid]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,6 +91,9 @@ const UpdateStory = (props) => {
       formData.append("genre", selectedGenre);
       formData.append("theme", theme);
       formData.append("image", file);
+      formData.append("paid", paid);
+      formData.append("price", paidValue);
+
       const config = {
         headers: {
           "content-type": "multipart/form-data",
@@ -131,6 +146,8 @@ const UpdateStory = (props) => {
           </Container>
         ) : (
           <div className={classes.child}>
+            <br />
+            <br />
             <form onSubmit={handleSubmit}>
               <TextField
                 label="title"
@@ -179,6 +196,35 @@ const UpdateStory = (props) => {
                   );
                 })}
               </Menu>
+              <FormControl component="fieldset">
+                <FormGroup aria-label="position" row>
+                  <FormControlLabel
+                    onClick={(e) => {
+                      setPaid((paid) => !paid);
+                      console.log(paid);
+                    }}
+                    checked={paid}
+                    control={<Switch color="primary" />}
+                    label="Paid?"
+                    labelPlacement="start"
+                  />
+                  {paid ? (
+                    <TextField
+                      style={{ marginLeft: 20 }}
+                      id="standard-basic"
+                      label="Enter Amount"
+                      value={paidValue}
+                      onChange={(e) => {
+                        setPaidValue(e.target.value);
+
+                        console.log(paidValue);
+                      }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </FormGroup>
+              </FormControl>
               <br />
               <br />
               <TextField

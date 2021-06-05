@@ -227,7 +227,6 @@ const Nav1 = (props) => {
       )}
     </Menu>
   );
-
   return (
     <div className={classes.grow}>
       <AppBar position="static" style={{ backgroundColor: "black" }}>
