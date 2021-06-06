@@ -24,6 +24,9 @@ const SingleNovel = (props) => {
   const [library, setLibrary] = useState([]);
   const [loader, setLoader] = useState(true);
   const [trigger, setTrigger] = useState(false);
+  const [trigger2, setTrigger2] = useState(false);
+
+  // const [existing, setExisting] = useState([]);
 
   const id = props.match.params.id;
 
@@ -41,6 +44,27 @@ const SingleNovel = (props) => {
         console.log(err);
       });
   }, [trigger]);
+
+  useEffect(() => {
+    if (localStorage.getItem("novel_id") == null) {
+      localStorage.setItem("novel_id", "[]");
+    }
+  }, [userService.getLoggedInUser()._id]);
+
+  useEffect(() => {
+    console.log(novel._id);
+    if (localStorage.getItem("novel_id") == null) {
+      localStorage.setItem("novel_id", "[]");
+    }
+
+    if (novel._id) {
+      var old_data = JSON.parse(localStorage.getItem("novel_id"));
+      if (!old_data.includes(novel._id)) {
+        old_data.push(novel._id);
+      }
+      localStorage.setItem("novel_id", JSON.stringify(old_data));
+    }
+  }, [novel]);
 
   return (
     <Auth>
@@ -93,6 +117,17 @@ const SingleNovel = (props) => {
                 <br />
                 <br />
                 Written by <strong>{user_info.name}</strong>
+                <br />
+                <br />
+                {novel.price == 0 ? (
+                  <>
+                    Price <strong style={{ color: "green" }}>FREE</strong>
+                  </>
+                ) : (
+                  <>
+                    Price <strong>{novel.price}</strong>
+                  </>
+                )}
                 <hr style={{ marginTop: "30px" }} />
                 <br />
                 <br />
@@ -105,6 +140,7 @@ const SingleNovel = (props) => {
             {userService.isLoggedIn() && (
               <Grid container>
                 <Grid item xs={1}></Grid>
+
                 <Grid item xs={11} md={5}>
                   {!chapters.length == 0 && (
                     <Button
